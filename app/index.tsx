@@ -3,7 +3,7 @@ import { CardBody } from "@/components/VehicleCards/CardBody";
 import { CardHeader } from "@/components/VehicleCards/CardHeader";
 import { Vehicle } from "@/domain/vehicle";
 import { getAllVehicles } from "@/functions";
-import { Link, useFocusEffect } from "expo-router";
+import { Link, router, useFocusEffect } from "expo-router";
 import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 
@@ -39,7 +39,7 @@ export default function Index() {
         contentContainerStyle={{ padding: 16 }}
         renderItem={({item: vehicle}) => (
           <View style={styles.card}>
-            <Pressable onPress={() => alert(JSON.stringify(vehicle, null, 2))}>
+            <Pressable onPress={() => router.push({pathname: '/vehicle/[id]' as any, params: {id: vehicle.vin}})}>
               <CardHeader vin={vehicle.vin} mileage={vehicle.mileage} />
               <CardBody location={vehicle.location} make={vehicle.make} model={vehicle.model} year={vehicle.year} tag={vehicle.tag} createdAt={vehicle.createdAt} />
             </Pressable>
