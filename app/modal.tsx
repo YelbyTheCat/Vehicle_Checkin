@@ -1,7 +1,8 @@
+import Button from '@/components/Button';
 import { VehicleForm } from '@/components/forms/VehicleForm';
 import { createVehicle } from '@/functions';
 import { useRouter } from 'expo-router';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 export default function Modal() {
 
@@ -15,7 +16,7 @@ export default function Modal() {
 
   return (
     <View style={{ padding: 20 }}>
-      <Text>Vehicle Form</Text>
+      <Button label="Scan VIN" onPress={() => router.push('/vin-scanner' as any)} />
       <VehicleForm {...{onSubmit}}/>
     </View>
   );

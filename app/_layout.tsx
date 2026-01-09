@@ -12,6 +12,7 @@ export default function Layout() {
         }}
       />
       <Stack.Screen name="vehicle/[id]" options={{title: "Vehicle Details"}}/>
+      <Stack.Screen name="vin-scanner" options={{title: "Scan VIN"}}/>
     </Stack>
   );
 }
