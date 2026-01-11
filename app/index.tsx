@@ -25,18 +25,18 @@ export default function Index() {
   });
 
   return (
-    <View>
-      <View style={{flexDirection: "row", justifyContent: "space-around", marginVertical: 10}}>
+    <View style={{ flex: 1 }}>
+      <View style={{flexDirection: "row", justifyContent: "space-around", marginTop: 10}}>
         <Link href="/modal" asChild>
           <Button label="Add Vehicle"/>
         </Link>
         <Button label="Format" />
       </View>
-      {/* <Text>{JSON.stringify(vehicles, null, 2)}</Text> */}
       <FlatList
-        data={vehicles}
+        style={{ flex: 1 }}
+        data={vehicles.reverse()}
         keyExtractor={item => item.vin.toString()}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 120 }}
         renderItem={({item: vehicle}) => (
           <View style={styles.card}>
             <Pressable onPress={() => router.push({pathname: '/vehicle/[id]' as any, params: {id: vehicle.vin}})}>

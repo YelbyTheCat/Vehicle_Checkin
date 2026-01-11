@@ -1,4 +1,5 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { router } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
@@ -24,12 +25,16 @@ export default function Modal() {
 
   const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    router.dismissTo({pathname: '/modal', params: { vin: data }});
   }
 
   return (
   <View style={styles.container}>
-    <CameraView style={StyleSheet.absoluteFillObject} facing="back" onBarcodeScanned={scanned ? undefined : handleBarCodeScanned} barcodeScannerSettings={{barcodeTypes: ['code128', 'qr']}}/>
+    <CameraView 
+      style={StyleSheet.absoluteFillObject} 
+      facing="back" 
+      onBarcodeScanned={scanned ? undefined : handleBarCodeScanned} 
+      barcodeScannerSettings={{barcodeTypes: ['code128', 'qr', 'code39']}}/>
   </View>);
 };
 

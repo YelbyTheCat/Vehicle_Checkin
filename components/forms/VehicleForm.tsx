@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Button, Text, TextInput } from "react-native"
 
@@ -12,11 +12,11 @@ type VehicleFormValues = {
   tag: string
 }
 
-
-export const VehicleForm = ({onSubmit}: {onSubmit: (data: any) => void}) => {
+export const VehicleForm = ({onSubmit, vin, vehicleData}: {onSubmit: (data: any) => void, vin?: string, vehicleData?: any}) => {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<VehicleFormValues>({
     defaultValues: {
@@ -29,6 +29,23 @@ export const VehicleForm = ({onSubmit}: {onSubmit: (data: any) => void}) => {
       tag: "",
     },
   })
+
+  useEffect(() => {
+    if (vin) {
+      setValue("vin", vin);
+    }
+    if (vehicleData) {
+      if (vehicleData.make) {
+        setValue("make", vehicleData.make);
+      }
+      if (vehicleData.model) {
+        setValue("model", vehicleData.model);
+      }
+      if (vehicleData.year) {
+        setValue("year", vehicleData.year);
+      }
+    }
+  }, [vin, vehicleData]);
 
 
   const fields: { key: keyof VehicleFormValues; label: string; rules?: any }[] = [

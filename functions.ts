@@ -1,6 +1,8 @@
 import { Vehicle } from "./domain/vehicle";
 import { KVVehicleRepository } from "./repositories/vehicleRepository";
+import { KVVinApiRepository } from "./repositories/vinApiRepository";
 import { CreateVehicleRequest, CreateVehicleUseCase, DeleteAllVehiclesUseCase, DeleteVehicleRequest, DeleteVehicleUseCase, GetAllVehiclesUseCase, GetVehicleRequest, GetVehicleUseCase, UpdateVehicleRequest, UpdateVehicleUseCase } from "./useCases/vehicleUsecases";
+import { GetVinDetailsRequest, GetVinDetailsUseCase } from "./useCases/vinApiUseCases";
 
 const createVehicle = async (params: CreateVehicleRequest): Promise<Vehicle> => {
   const repository = new KVVehicleRepository();
@@ -46,6 +48,20 @@ const deleteAllVehicles = async (): Promise<void> => {
   await deleteAllVehiclesUseCase.execute();
 };
 
+const getVehicleInfo = async (params: GetVinDetailsRequest): Promise<any> => {
+  const repository = new KVVinApiRepository();
+  const getVinDetailsUseCase = new GetVinDetailsUseCase({ vinApiRepository: repository });
+  try {
+    const response = await getVinDetailsUseCase.execute(params);
+    const results = response.data.Results[0];
+    console.log("VIN details response:", JSON.stringify(results, null, 2));
+    return results;
+  } catch (error) {
+    return null;
+  }
+}
+
 export {
-  createVehicle, deleteAllVehicles, deleteVehicle, getAllVehicles, getVehicle, updateVehicle
+  createVehicle, deleteAllVehicles, deleteVehicle, getAllVehicles, getVehicle, getVehicleInfo, updateVehicle
 };
+
