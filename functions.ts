@@ -54,7 +54,6 @@ const getVehicleInfo = async (params: GetVinDetailsRequest): Promise<any> => {
   try {
     const response = await getVinDetailsUseCase.execute(params);
     const results = response.data.Results[0];
-    console.log("VIN details response:", JSON.stringify(results, null, 2));
     return results;
   } catch (error) {
     return null;

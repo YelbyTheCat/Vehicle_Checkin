@@ -44,6 +44,15 @@ export const VehicleForm = ({onSubmit, vin, vehicleData}: {onSubmit: (data: any)
       if (vehicleData.year) {
         setValue("year", vehicleData.year);
       }
+      if (vehicleData.mileage) {
+        setValue("mileage", vehicleData.mileage);
+      }
+      if (vehicleData.location) {
+        setValue("location", vehicleData.location);
+      }
+      if (vehicleData.tag) {
+        setValue("tag", vehicleData.tag);
+      }
     }
   }, [vin, vehicleData]);
 
@@ -73,7 +82,8 @@ export const VehicleForm = ({onSubmit, vin, vehicleData}: {onSubmit: (data: any)
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10 }}
+            placeholderTextColor="black"
+            style={{ height: 40, borderColor: 'black', borderWidth: 1, marginBottom: 10, borderRadius: 10 }}
           />
         )}
         

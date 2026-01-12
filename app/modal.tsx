@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import { VehicleForm } from '@/components/forms/VehicleForm';
 import { createVehicle, getVehicleInfo } from '@/functions';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 
 export default function Modal() {
@@ -17,20 +17,10 @@ export default function Modal() {
 
   const {vin} = useLocalSearchParams<{vin?: string}>();
 
-  useEffect(() => {
-    if (vin) {
-      onScanVin(vin);
-    }
-  }, [vin]);
-
   const onSubmit = async (data: any) => {
     // alert(JSON.stringify(data));
     await createVehicle(data);
     router.navigate('../');
-  }
-
-  const onScanVin = (vin: string) => {
-    alert(`Scanned VIN: ${vin}`);
   }
 
   const fetchVinInfo = async (vin: string) => {
