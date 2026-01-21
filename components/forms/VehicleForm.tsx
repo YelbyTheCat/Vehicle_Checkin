@@ -18,12 +18,14 @@ export const VehicleForm = ({
   vehicleData,
   onVinChange,
   submitLabel = "Submit",
+  disabledList,
 }: {
   onSubmit: (data: any) => void;
   vin?: string;
   vehicleData?: any;
   onVinChange?: (vin: string) => void;
   submitLabel?: string;
+  disabledList?: string[];
 }) => {
   const {
     control,
@@ -103,6 +105,7 @@ export const VehicleForm = ({
             rules={rules}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
+                editable={disabledList?.includes(key) ? false : true}
                 placeholder={label}
                 onBlur={onBlur}
                 // onChangeText={onChange}
@@ -114,11 +117,14 @@ export const VehicleForm = ({
                   borderWidth: 1,
                   marginBottom: 10,
                   borderRadius: 10,
+                  backgroundColor: disabledList?.includes(key)
+                    ? "lightgray"
+                    : "white",
                 }}
                 onChangeText={(text) => {
                   onChange(text);
                   if (key === "vin" && onVinChange) {
-                    onVinChange(text);
+                    onVinChange(text.toUpperCase());
                   }
                 }}
               />

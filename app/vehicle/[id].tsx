@@ -46,7 +46,7 @@ export default function Vehicle() {
   const openEmail = async () => {
     if (!id || !vehicle) return;
     const to = "";
-    const cc = process.env.WORKEMAIL || "";
+    const cc = process.env["EXPO_PUBLIC_WORK_EMAIL"] || "";
     const subject = `VCI ${vehicle.vin}${vehicle?.tag ? ` | Tag: ${vehicle?.tag}` : ""}`;
     const body = textMessage();
 
@@ -84,6 +84,7 @@ export default function Vehicle() {
         vehicleData={vehicle}
         onSubmit={onSubmit}
         submitLabel="Update"
+        disabledList={["vin"]}
       />
     </View>
   );
