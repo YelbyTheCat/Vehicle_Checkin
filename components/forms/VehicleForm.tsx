@@ -17,11 +17,13 @@ export const VehicleForm = ({
   vin,
   vehicleData,
   onVinChange,
+  submitLabel = "Submit",
 }: {
   onSubmit: (data: any) => void;
   vin?: string;
   vehicleData?: any;
   onVinChange?: (vin: string) => void;
+  submitLabel?: string;
 }) => {
   const {
     control,
@@ -125,7 +127,7 @@ export const VehicleForm = ({
           {errors[key] && <Text>{errors[key]?.message}</Text>}
         </React.Fragment>
       ))}
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <Button title={submitLabel} onPress={handleSubmit(onSubmit)} />
     </React.Fragment>
   );
 };

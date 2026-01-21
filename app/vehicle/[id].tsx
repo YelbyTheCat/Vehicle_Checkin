@@ -61,18 +61,30 @@ export default function Vehicle() {
 
   return (
     <View style={{ padding: 20 }}>
-      <Button
-        label="Copy to Clipboard"
-        onPress={async () => {
-          if (!id || !vehicle) return;
-          {
-            const text = `Vin: ${id} ${vehicle?.tag ? `| Tag: ${vehicle?.tag}` : ""} ${vehicle?.mileage ? `| Miles: ${vehicle?.mileage}` : ""} ${vehicle?.year ? `| ${vehicle?.year} ` : ""}${vehicle?.make || ""} ${vehicle?.model || ""} ${vehicle?.location ? `| Location: ${vehicle?.location}` : ""}`;
-            await Clipboard.setStringAsync(text);
-            ToastAndroid.show("VIN copied to clipboard", ToastAndroid.SHORT);
-          }
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          gap: 10,
+          marginBottom: 10,
         }}
+      >
+        <Button
+          icon="content-copy"
+          onPress={async () => {
+            if (!id || !vehicle) return;
+            const text = textMessage();
+            await Clipboard.setStringAsync(text);
+          }}
+        />
+        <Button icon="email" onPress={openEmail} />
+      </View>
+      <VehicleForm
+        vin={id}
+        vehicleData={vehicle}
+        onSubmit={onSubmit}
+        submitLabel="Update"
       />
-      <VehicleForm vin={id} vehicleData={vehicle} onSubmit={onSubmit} />
     </View>
   );
 }
