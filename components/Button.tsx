@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Animated, Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
-  label?: string;
+  label: string;
   onPress?: () => void;
   icon?: keyof typeof MaterialIcons.glyphMap;
 };
@@ -28,14 +28,8 @@ export default function Button({ label, onPress, icon }: Props) {
 
   return (
     <View style={styles.buttonContainer}>
-      <Pressable
-        style={styles.button}
-        onPressIn={pressIn}
-        onPressOut={pressOut}
-        {...{ onPress }}
-      >
-        {icon && <MaterialIcons name={icon} size={20} color="black" />}
-        {label && <Text style={styles.buttonLabel}>{label}</Text>}
+      <Pressable style={styles.button} {...{ onPress }}>
+        <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>
   );
@@ -62,6 +56,5 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: "#000000ff",
     fontSize: 16,
-    gap: 6,
   },
 });
